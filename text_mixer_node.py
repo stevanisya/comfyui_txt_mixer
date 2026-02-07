@@ -1,17 +1,16 @@
 class TextMixer:
     """
     Concatenate multiple text inputs into a single STRING output.
-    Input count adjustable at runtime via the widget.
+    Inputs auto-expand: connect to the spare slot and a new one appears.
     """
     @classmethod
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "inputs_count": ("INT", {"default": 3, "min": 1, "max": 50, "step": 1}),
                 "separator": (["newline", "paragraph", "none", "space", "comma"],),
-                "txt_1": ("STRING", {"default": "", "forceInput": True}),
             },
             "optional": {
+                "txt_1": ("STRING", {"default": "", "forceInput": True}),
                 "txt_2": ("STRING", {"default": "", "forceInput": True}),
             },
         }
@@ -29,10 +28,12 @@ class TextMixer:
         "comma": ", ",
     }
 
-    def mix(self, inputs_count, separator, **kwargs):
+    def mix(self, separator, **kwargs):
         parts = []
-        for i in range(1, inputs_count + 1):
-            t = kwargs.get(f"txt_{i}", "")
+        i = 1
+        while f"txt_{i}" in kwargs:
+            t = kwargs[f"txt_{i}"]
             if t:
                 parts.append(str(t))
+            i += 1
         return (self.SEPARATOR_MAP[separator].join(parts),)
