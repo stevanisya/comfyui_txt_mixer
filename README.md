@@ -1,8 +1,8 @@
 # ComfyUI Text Mixer Node
 
-Concatenate multiple text inputs into one output.
+Concatenate multiple text inputs into a single output.
 
-Result = txt_1 + txt_2 + ... + txt_N
+- Auto-expanding inputs: a spare slot is always available. Connect to it and a new one appears, disconnect and it gets removed
+- Separator option to choose how inputs are joined (newline, paragraph, none, space, or comma)
 
-
-nothing special : )
+https://github.com/user-attachments/assets/5166a720-15c0-4d6d-a254-2efc940b8118
